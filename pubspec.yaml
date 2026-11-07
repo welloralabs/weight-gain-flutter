@@ -1,0 +1,19 @@
+name: wgcalc_hp_2610
+description: Weight Gain Calculator - calories, BMI, protein, diet and workout plans.
+publish_to: "none"
+version: 2.1.0+1
+
+environment:
+  sdk: ">=3.3.0 <5.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
