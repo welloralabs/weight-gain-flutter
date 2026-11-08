@@ -11,6 +11,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # GitHub's web upload often drops folders and puts every file in the
+      # repository root. This step puts each file back where Flutter expects it.
+      - name: Restore folder structure
+        run: |
+          move() { if [ -f "$1" ] && [ ! -f "$2/$1" ]; then mkdir -p "$2"; mv "$1" "$2/$1"; echo "moved $1 -> $2/"; fi; }
+          for f in main.dart theme.dart widgets.dart links.dart; do move "$f" lib; done
+          for f in calc.dart format.dart; do move "$f" lib/logic; done
+          for f in calculators.dart home.dart soon.dart tool.dart weight_gain.dart; do move "$f" lib/screens; done
+          move calc_test.dart test
+          echo "--- project tree"
+          find lib test -type f | sort
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
